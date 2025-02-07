@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  series_db:
+    image: bitnami/mariadb:latest
+    container_name: series_db
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=series
+      - MARIADB_DATABASE=series_db
+    volumes:
+      - series_data:/bitnami/mariadb
+    networks:
+      - series-network
+    restart: always
+
+  laravel:
+    image: bitnami/laravel:8
+    container_name: series-app
+    ports:
+      - "8001:8001"
+    environment:
+      - DB_HOST=series_db
+      - DB_PORT=3306
+      - DB_USERNAME=series
+      - DB_DATABASE=series_db
+    volumes:
+      - ./:/app
+    networks:
+      - series-network
+    depends_on:
+      - series_db
+    restart: always
+    command: /bin/sh -c "composer install && cp .env.example .env && php artisan key:generate && php artisan migrate && php artisan db:seed && php artisan serve --host=0.0.0.0 --port=8001"
+
+volumes:
+  series_data:
+    driver: local
+
+networks:
+  series-network:
+    driver: bridge
