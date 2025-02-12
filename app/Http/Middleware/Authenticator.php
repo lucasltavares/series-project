@@ -18,7 +18,7 @@ class Authenticator
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
+        if (!Auth::check()) { // Checa se o usuario esta logado em sessao.
             throw new AuthenticationException();
         }
 
