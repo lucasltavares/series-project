@@ -10,5 +10,7 @@
             <input type="password" id="password" name="password" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary mt-4">Entrar</button>
+
+        <a href="{{ route('users.create') }}" class="btn btn-secondary mt-4">Registrar</a>
     </form>
 </x-layout>
