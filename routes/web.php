@@ -27,18 +27,28 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [UsersController::class, 'create'])->name('users.create');
 Route::post('/register', [UsersController::class, 'store'])->name('users.store');
 
-Route::get('/', function () {
-    return redirect('/series');
-})->middleware(\App\Http\Middleware\Authenticator::class);
+
 
 Route::resource('/series', SeriesController::class)
     ->except(['show']);
 
-Route::get('/series/{series}/seasons', [SeasonsController::class, 'index'])->name('seasons.index');
+Route::middleware('authenticator')->group(function () {
+    Route::get('/', function () {
+        return redirect('/series');
+    });
 
-Route::get('/seasons/{season}/episodes', [EpisodesController::class, 'index'])->name('episodes.index');
+    Route::get('/series/{series}/seasons', [SeasonsController::class, 'index'])
+    ->name('seasons.index');
 
-Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'watch'])->name('episodes.watch');
+    Route::get('/seasons/{season}/episodes', [EpisodesController::class, 'index'])->name('episodes.index');
+
+    Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'watch'])->name('episodes.watch');
+
+});
+
+
+
+
 
 Route::get('email', function (Request $request) {
     return new SeriesCreated(

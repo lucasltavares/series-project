@@ -12,9 +12,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('series.index') }}">Series app</a>
-        @if (Auth::check())
+        <!-- @if (Auth::check()) -->
+        @auth
             <a href="{{ route('logout') }}">Sair</a>
-        @endif
+        @endauth
+        <!--@endif-->
+
+        @guest
+            <a href="{{ route('login') }}">Entrar</a>
+        @endguest
     </div>
 </nav>
 <div class="container">

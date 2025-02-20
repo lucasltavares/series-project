@@ -17,7 +17,7 @@ class SeriesController extends Controller
 {
     public function __construct(private SeriesRepository $repository)
     {
-        // Dependency injection
+        $this->middleware(Authenticator::class)->except('index');
     }
     public function index(Request $request)
     {
