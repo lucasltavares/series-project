@@ -5,6 +5,7 @@ use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\EpisodesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
+use App\Mail\SeriesCreated;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -38,3 +39,12 @@ Route::get('/series/{series}/seasons', [SeasonsController::class, 'index'])->nam
 Route::get('/seasons/{season}/episodes', [EpisodesController::class, 'index'])->name('episodes.index');
 
 Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'watch'])->name('episodes.watch');
+
+Route::get('email', function (Request $request) {
+    return new SeriesCreated(
+        'The punisher',
+        '1',
+        '5',
+        '5'
+    );
+});
