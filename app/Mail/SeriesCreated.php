@@ -24,7 +24,7 @@ class SeriesCreated extends Mailable
         public int $episodiosPorTemporada
     )
     {
-        //
+        $this->subject('Nova serie criada');
     }
 
     /**
@@ -37,6 +37,6 @@ class SeriesCreated extends Mailable
         // return $this->view('mail.series-created');
         return $this
             ->markdown('mail.series-created')
-            ->to($userEmail);
+            ->to($this->userEmail);
     }
 }

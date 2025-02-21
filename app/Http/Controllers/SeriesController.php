@@ -6,12 +6,14 @@ use Auth;
 use App\Models\Season;
 use App\Models\Series;
 use App\Models\Episode;
+use App\Models\User;
 use App\Mail\SeriesCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Repositories\SeriesRepository;
 use App\Http\Requests\SeriesFormRequest;
+use App\Http\Middleware\Authenticator;
 
 class SeriesController extends Controller
 {
@@ -37,12 +39,19 @@ class SeriesController extends Controller
     {
         $serie = $this->repository->add($request);
 
-        Mail::to(Auth::user())->send(new SeriesCreated( 
-                        $request->user()->email,
-            $serie->nome, 
-              $serie->id, 
-        $request->seasonsQty, 
-$request->episodesPerSeason)); 
+        $users = User::all();
+
+        foreach ($users as $user) {
+            Mail::to($user)->send(new SeriesCreated(
+                $user->email,
+                $serie->nome,
+                $serie->id,
+                $request->seasonsQty,
+                $request->episodesPerSeason
+            ));
+        }
+
+
 
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");

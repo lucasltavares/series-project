@@ -52,6 +52,7 @@ Route::middleware('authenticator')->group(function () {
 
 Route::get('email', function (Request $request) {
     return new SeriesCreated(
+        'mail@mail.com',
         'The punisher',
         '1',
         '5',

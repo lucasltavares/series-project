@@ -31,7 +31,7 @@ services:
     depends_on:
       - series_db
     restart: always
-    command: /bin/sh -c "composer install && cp .env.example .env && php artisan key:generate && php artisan migrate && php artisan db:seed && php artisan serve --host=0.0.0.0 --port=8001"
+    command: /bin/sh -c "composer install && php artisan migrate && php artisan serve --host=0.0.0.0 --port=8001"
 
 volumes:
   series_data:
