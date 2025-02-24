@@ -41,18 +41,27 @@ class SeriesController extends Controller
 
         $users = User::all();
 
+<<<<<<< HEAD
         $schedule = now()->addSeconds(5);
 
         foreach ($users as $user) {
             $email = new SeriesCreated(
+=======
+        foreach ($users as $user) {
+            Mail::to($user)->send(new SeriesCreated(
+>>>>>>> 9d57ce86bcf99c6616e734e676b27eb30de89eb3
                 $user->email,
                 $serie->nome,
                 $serie->id,
                 $request->seasonsQty,
                 $request->episodesPerSeason
+<<<<<<< HEAD
             );
 
             Mail::to($user)->later($schedule, $email);
+=======
+            ));
+>>>>>>> 9d57ce86bcf99c6616e734e676b27eb30de89eb3
         }
 
 
