@@ -37,6 +37,6 @@ class SeriesCreated extends Mailable
         // return $this->view('mail.series-created');
         return $this
             ->markdown('mail.series-created')
-            ->to($this->userEmail);
+            ->to($this->userEmail); // ok
     }
 }
