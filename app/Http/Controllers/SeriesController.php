@@ -45,6 +45,7 @@ class SeriesController extends Controller
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         $schedule = now()->addSeconds(5);
 
         foreach ($users as $user) {
@@ -53,6 +54,10 @@ class SeriesController extends Controller
         foreach ($users as $user) {
             Mail::to($user)->send(new SeriesCreated(
 >>>>>>> 9d57ce86bcf99c6616e734e676b27eb30de89eb3
+=======
+        foreach ($users as $user) {
+            Mail::to($user)->send(new SeriesCreated(
+>>>>>>> origin/main
 =======
         foreach ($users as $user) {
             Mail::to($user)->send(new SeriesCreated(
@@ -74,12 +79,16 @@ class SeriesController extends Controller
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             );
 
             Mail::to($user)->later($schedule, $email);
 =======
             ));
 >>>>>>> 9d57ce86bcf99c6616e734e676b27eb30de89eb3
+=======
+            ));
+>>>>>>> origin/main
 =======
             ));
 >>>>>>> origin/main
