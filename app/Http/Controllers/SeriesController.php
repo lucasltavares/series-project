@@ -41,102 +41,17 @@ class SeriesController extends Controller
 
         $users = User::all();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         $schedule = now()->addSeconds(5);
 
         foreach ($users as $user) {
-            $email = new SeriesCreated(
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> 9d57ce86bcf99c6616e734e676b27eb30de89eb3
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
-=======
-        foreach ($users as $user) {
-            Mail::to($user)->send(new SeriesCreated(
->>>>>>> origin/main
+            Mail::to($user)->queue(new SeriesCreated(
                 $user->email,
                 $serie->nome,
                 $serie->id,
                 $request->seasonsQty,
                 $request->episodesPerSeason
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            );
-
-            Mail::to($user)->later($schedule, $email);
-=======
             ));
->>>>>>> 9d57ce86bcf99c6616e734e676b27eb30de89eb3
-=======
-            ));
->>>>>>> origin/main
-=======
-            ));
->>>>>>> origin/main
-=======
-            ));
->>>>>>> origin/main
-=======
-            ));
->>>>>>> origin/main
-=======
-            ));
->>>>>>> origin/main
-=======
-            ));
->>>>>>> origin/main
-=======
-            ));
->>>>>>> origin/main
-=======
-            ));
->>>>>>> origin/main
         }
-
-
 
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
