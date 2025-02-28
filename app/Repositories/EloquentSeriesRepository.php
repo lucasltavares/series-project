@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -14,7 +14,10 @@ class EloquentSeriesRepository implements SeriesRepository
     {
         // Alternativa: Usar DB:Begintransaction();, DB:Commit(); e DB:Rollback() no início, meio e fim da função.
         return DB::transaction(function () use ($request) { // Ou passar &serie dentro do "use" como referência.
-            $serie = Series::create($request->all());
+            $serie = Series::create([
+                'nome' => $request->nome,
+                'cover' => $request->coverPath,
+            ]);
             $seasons = [];
             for ($i = 1; $i <= $request->seasonsQty; $i++) {
                 $seasons[] = [
@@ -35,7 +38,7 @@ class EloquentSeriesRepository implements SeriesRepository
             }
             Episode::insert($episodes);
 
-            return $serie;    
+            return $serie;
         });
     }
 }
